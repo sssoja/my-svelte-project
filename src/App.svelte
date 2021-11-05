@@ -1,34 +1,151 @@
 <script>
-	export let name;
+	// Typeform API info
+	// const baseUrl = "https://api.typeform.com/";
+	// const formsUrl = `${baseUrl}/forms`;
+	// const typeformKey = "9LjUeHuHFymitNgwYFwg5CcH7GYqeW9y5e6qi4yYRdnu";
+	// 	const urlToFetch = `${baseUrl}${formsUrl}`;
+
+	let forms = [
+		{
+			id: "DjlXLX2s",
+			type: "quiz",
+			title: "Virtual Lab Survey",
+			workspace: { href: "https://api.typeform.com/workspaces/Ghm6de" },
+			theme: { href: "https://api.typeform.com/themes/qHWOQ7" },
+			settings: {
+				language: "en",
+				progress_bar: "proportion",
+				meta: { allow_indexing: false },
+				hide_navigation: false,
+				is_public: true,
+				is_trial: false,
+				show_progress_bar: true,
+				show_typeform_branding: true,
+				are_uploads_public: false,
+				show_time_to_complete: true,
+				pro_subdomain_enabled: false,
+				capabilities: {
+					e2e_encryption: { enabled: false, modifiable: false },
+				},
+			},
+			thankyou_screens: [
+				{
+					id: "oBB8D27w4zil",
+					ref: "01FKK5KXV1AT4AG5XFCZYNGTTN",
+					title: "",
+					properties: {
+						show_button: true,
+						share_icons: true,
+						button_mode: "reload",
+						button_text: "reload",
+					},
+				},
+				{
+					id: "DefaultTyScreen",
+					ref: "default_tys",
+					title:
+						"Thanks for completing this typeform\nNow *create your own* — it's free, easy, \u0026 beautiful",
+					properties: {
+						show_button: true,
+						share_icons: false,
+						button_mode: "redirect",
+						button_text: "Create a *typeform*",
+						redirect_url:
+							"https://www.typeform.com/explore/?utm_campaign=DjlXLX2s\u0026utm_source=typeform.com\u0026utm_medium=typeform\u0026utm_content=typeform-thankyoubutton\u0026utm_term=EN",
+					},
+					attachment: {
+						type: "image",
+						href: "https://images.typeform.com/images/2dpnUBBkz2VN",
+					},
+				},
+			],
+			fields: [
+				{
+					id: "5Qw3haKmUlKG",
+					title: "Hello, what's your name?",
+					ref: "01FKK5KXT7SG9C4TK19WF6R1ET",
+					properties: {},
+					validations: { required: false },
+					type: "short_text",
+					attachment: {
+						type: "image",
+						href: "https://images.typeform.com/images/WMALzu59xbXQ",
+					},
+					layout: {
+						type: "split",
+						attachment: {
+							type: "image",
+							href:
+								"https://images.typeform.com/images/WMALzu59xbXQ",
+						},
+					},
+				},
+				{
+					id: "8ryQFvgTH3gu",
+					title: "What's your age?",
+					ref: "710fbd33-3362-4cfe-b1c0-cf08702bf9d8",
+					properties: {},
+					validations: { required: false },
+					type: "short_text",
+				},
+				{
+					id: "0gQBt2ecOSRK",
+					title:
+						"Nice to meet you, {{field:01FKK5KXT7SG9C4TK19WF6R1ET}}, how is your day going?",
+					ref: "01FKK5KXV1TQ7E3QMRFPW7A383",
+					properties: {
+						randomize: false,
+						allow_multiple_selection: true,
+						allow_other_choice: false,
+						vertical_alignment: true,
+						choices: [
+							{
+								id: "ZkM1QMXrIHBn",
+								ref: "01FKK5KXV1J3EBHA78322MWQMG",
+								label: "Terrific!",
+							},
+							{
+								id: "rwFklpTij36Y",
+								ref: "01FKK5KXV12BWYAMGXJZ5Q0T52",
+								label: "Not so well...",
+							},
+						],
+					},
+					validations: { required: false },
+					type: "multiple_choice",
+				},
+			],
+			_links: { display: "https://qaexgf20gqj.typeform.com/to/DjlXLX2s" },
+		},
+	];
+	let fields = forms[0].fields;
+	let totalQuestions = fields.length;
 </script>
 
-<style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
+<!-- Form -->
+<div>
+	<form>
+		<h2 class="label-wrapper">
+			<label for="question-0">Question one</label>
+		</h2>
+		<input
+			type="text"
+			id="question-0"
+			autocomplete="off"
+			class="input input__lg" />
+		<button class="btn">Submit</button>
+	</form>
 
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
+	<h2 id="heading">Number of questions: {totalQuestions}</h2>
+</div>
 
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
-</style>
-
-<main>
-	<h1>Hello {name}!</h1>
-	<p>
-		Visit the
-		<a href="https://svelte.dev/tutorial">Svelte tutorial</a>
-		to learn how to build Svelte apps.
-	</p>
-</main>
+<!-- Fields -->
+<ul>
+	{#each fields as field, index (field.id)}
+		<li class="field">
+			Question number:
+			{index + 1}
+			<h3 class="field-text">{field.title}</h3>
+		</li>
+	{:else}Nothing to do here!{/each}
+</ul>
