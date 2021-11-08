@@ -5,7 +5,11 @@
 	// const typeformKey = "9LjUeHuHFymitNgwYFwg5CcH7GYqeW9y5e6qi4yYRdnu";
 	// 	const urlToFetch = `${baseUrl}${formsUrl}`;
 
-	let forms = [
+	// import Fields from "./components/Fields.svelte";
+	import MultipleChoice from "./components/fields/MultipleChoice.svelte";
+	import ShortText from "./components/fields/ShortText.svelte";
+
+	const form = [
 		{
 			id: "DjlXLX2s",
 			type: "quiz",
@@ -118,34 +122,29 @@
 			_links: { display: "https://qaexgf20gqj.typeform.com/to/DjlXLX2s" },
 		},
 	];
-	let fields = forms[0].fields;
-	let totalQuestions = fields.length;
+
+	const { fields } = form[0];
+	$: console.log(fields);
+	const totalQuestions = fields.length;
 </script>
 
-<!-- Form -->
-<div>
+<div class="surveyapp stack-large">
 	<form>
-		<h2 class="label-wrapper">
-			<label for="question-0">Question one</label>
-		</h2>
-		<input
-			type="text"
-			id="question-0"
-			autocomplete="off"
-			class="input input__lg" />
-		<button class="btn">Submit</button>
+		<div class="stack-small">
+			{#each fields as field, index (field.id)}
+				<h2 class="label-wrapper">
+					<label for="question-0">Question {index + 1}</label>
+				</h2>
+				<!-- Fields -->
+				{#if field.type === 'short_text'}
+					<ShortText {field} />
+				{:else if (fields.type = 'multiple_choice')}
+					<MultipleChoice />
+				{:else}
+					<p>You've reached the end of the survey!</p>
+				{/if}
+			{/each}
+		</div>
 	</form>
-
 	<h2 id="heading">Number of questions: {totalQuestions}</h2>
 </div>
-
-<!-- Fields -->
-<ul>
-	{#each fields as field, index (field.id)}
-		<li class="field">
-			Question number:
-			{index + 1}
-			<h3 class="field-text">{field.title}</h3>
-		</li>
-	{:else}Nothing to do here!{/each}
-</ul>
