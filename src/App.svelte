@@ -6,9 +6,9 @@
 
 	import MultipleChoice from "./components/fields/MultipleChoice.svelte";
 	import ShortText from "./components/fields/ShortText.svelte";
-	import formData from "../formData";
+	import formData from "./formData";
 
-	const { fields } = formData[0];
+	const { fields } = formData;
 	const { length } = fields;
 </script>
 
@@ -25,8 +25,8 @@
 				<!-- Fields -->
 				{#if field.type === 'short_text'}
 					<ShortText {field} />
-				{:else if (fields.type = 'multiple_choice')}
-					<MultipleChoice />
+				{:else if (field.type = 'multiple_choice')}
+					<MultipleChoice {field} />
 				{:else}
 					<p>You've reached the end of the survey!</p>
 				{/if}
