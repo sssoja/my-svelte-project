@@ -85,7 +85,7 @@ export default {
     {
       id: "8ryQFvgTH3gu",
       title: "What's your age?",
-      ref: "what_your_age",
+      ref: "whats_your_age",
       properties: {},
       validations: {
         required: false,
